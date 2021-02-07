@@ -457,6 +457,13 @@ public final class DropDown: UIView {
 
 	fileprivate var didSetupConstraints = false
 
+    public func setHeaderAndFooter(){
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 8))
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 8))
+        tableView.tableHeaderView = header
+        tableView.tableFooterView = footer
+    }
+
 	//MARK: - Init's
 
 	deinit {
@@ -1029,9 +1036,16 @@ extension DropDown {
 	}
 
 	/// Returns the height needed to display all cells.
-	fileprivate var tableHeight: CGFloat {
-		return tableView.rowHeight * CGFloat(dataSource.count)
-	}
+    fileprivate var tableHeight: CGFloat {
+        var gap: CGFloat = 0
+        if (tableView.tableFooterView != nil){
+            gap += tableView.tableFooterView?.frame.height ?? 0
+        }
+        if (tableView.tableHeaderView != nil){
+            gap += tableView.tableHeaderView?.frame.height ?? 0
+        }
+        return tableView.rowHeight * CGFloat(dataSource.count) + gap
+    }
 
     //MARK: Objective-C methods for converting the Swift type Index
 	@objc public func selectRow(_ index: Int, scrollPosition: UITableView.ScrollPosition = .none) {
