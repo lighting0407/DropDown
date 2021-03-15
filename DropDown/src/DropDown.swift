@@ -457,6 +457,11 @@ public final class DropDown: UIView {
 
 	fileprivate var didSetupConstraints = false
 
+    //新加的特例化
+    public var xExtraOffset: CGFloat = 0
+    public var isFixedWidth: Bool = false
+    public var fixedWidth: CGFloat = 0
+    
     public func setHeaderAndFooter(){
         let header = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 8))
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 8))
@@ -582,10 +587,10 @@ extension DropDown {
 			return
 		}
 
-		xConstraint.constant = layout.x
-		yConstraint.constant = layout.y
-		widthConstraint.constant = layout.width
-		heightConstraint.constant = layout.visibleHeight
+        xConstraint.constant = layout.x + xExtraOffset
+        yConstraint.constant = layout.y
+        widthConstraint.constant = isFixedWidth ? fixedWidth : layout.width
+        heightConstraint.constant = layout.visibleHeight
 
 		tableView.isScrollEnabled = layout.offscreenHeight > 0
 

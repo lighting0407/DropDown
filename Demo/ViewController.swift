@@ -198,6 +198,9 @@ class ViewController: UIViewController {
 		
 		// You can manually select a row if needed
 		//		dropDown.selectRowAtIndex(3)
+//                chooseArticleDropDown.xExtraOffset = -20
+//                chooseArticleDropDown.isFixedWidth = true
+//                chooseArticleDropDown.fixedWidth = 80
 	}
 	
 	func setupAmountDropDown() {
